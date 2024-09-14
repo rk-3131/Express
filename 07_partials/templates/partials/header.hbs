@@ -1,0 +1,36 @@
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+  integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+
+<style>
+  .navBar { display: flex; flex-direction: row; flex-wrap: wrap;
+  background-color: #2b7f8e;} .navBar div { margin: 40px; } div a{
+  text-decoration: none; color: aliceblue; } div p { text-decoration: none;
+  color: aliceblue; } .user { color: aliceblue; }
+</style>
+
+<div class="navBar">
+  <div class="home">
+    <a href="/">Home</a>
+  </div>
+  <div class="about">
+    <a href="/about">About</a>
+  </div>
+  <div class="contact">
+    <a href="/contact">Contact</a>
+  </div>
+  <div class="service">
+    <a href="/service">Service</a>
+  </div>
+  <div class="search">
+    <input type="text" name="item" id="item" placeholder="Search here" />
+  </div>
+  <div class="user">
+    <i class="fa-solid fa-user"></i>{{userName}}
+  </div>
+
+</div>
