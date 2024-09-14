@@ -15,6 +15,11 @@ const app = express();
 app.set("view engine", "hbs");
 // here engine needs to be setted for the dynamic site to be hosted in our case we have selected it as hbs
 
+// here by default name of the direcory is view and we can even modify that name to other directory so that it will be called by that name only and after that we can use it to call it it can be done by using the set function
+// const newPath = path.join(__dirname, "../nameOfDirectory");
+// app.set("views", newPath);
+// and it will work
+
 app.get("/", (req, res) => {
   res.render("index.hbs", {
     myName: "Radhakrushna Shamrao Mahadik",
@@ -24,6 +29,9 @@ app.get("/", (req, res) => {
 // creation of the views folder is neccessary for the dynamic site to be hosted by hbs view engine
 // the views folder need to be created in the same folder in which our index.js is located
 
+app.get("/about", (req, res) => {
+  res.render("about");
+});
 app.get("/", (req, res) => {
   res.send("This will be dynamic page");
 });
