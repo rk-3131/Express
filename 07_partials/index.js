@@ -28,8 +28,28 @@ app.get("/service", (req, res) => {
   res.render("service", { userName: "Radhakrushna", itemName: "services" });
 });
 
+app.get("/about/*", (req, res) => {
+  res.render("error", {
+    errorMessage: "Oops this page of about does not exist",
+  });
+});
+
+app.get("/contact/*", (req, res) => {
+  res.render("error", {
+    errorMessage: "Oops this page of contact does not exist",
+  });
+});
+
+app.get("/service/*", (req, res) => {
+  res.render("error", {
+    errorMessage: "Oops this page of service does not exist",
+  });
+});
+
 app.get("*", (req, res) => {
-  res.render("error");
+  res.render("error", {
+    errorMessage: "Oops this page does not exist",
+  });
 });
 
 app.listen(8000, () => {
