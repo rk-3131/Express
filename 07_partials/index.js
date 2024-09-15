@@ -15,16 +15,21 @@ hbs.registerPartials(partialPath);
 app.get("/", (req, res) => {
   res.render("index", {
     userName: "Radhakrushna",
+    itemName: "home",
   });
 });
 app.get("/about", (req, res) => {
-  res.render("about", { userName: "Radhakrushna" });
+  res.render("about", { userName: "Radhakrushna", itemName: "about" });
 });
 app.get("/contact", (req, res) => {
-  res.render("contact", { userName: "Radhakrushna" });
+  res.render("contact", { userName: "Radhakrushna", itemName: "contact" });
 });
 app.get("/service", (req, res) => {
-  res.render("service", { userName: "Radhakrushna" });
+  res.render("service", { userName: "Radhakrushna", itemName: "services" });
+});
+
+app.get("*", (req, res) => {
+  res.render("error");
 });
 
 app.listen(8000, () => {
