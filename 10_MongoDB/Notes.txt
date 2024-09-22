@@ -1,0 +1,235 @@
+To create the database we have to mention the name of the database that needs to be created 
+
+1. To create the database we first invoke mongosh
+2. show dbs is used to get the list of the database that are present there
+3. now to add the collection to the database we have to add it using createCollection method
+	db.createCollection("nameOfTheCollection")
+	It has to be mentioned in the string format
+4. To add the data into the collection that has created we have to add the document to the collections
+	db.nameOfCollection.insertOne({JSON file format}) 
+5. To add large number of elements we can make use of insertMany([{}, {}, {}]) function but make sure of using the array there
+
+Microsoft Windows [Version 10.0.19045.4894]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\admin>momgosh
+'momgosh' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\admin>mongosh
+Current Mongosh Log ID: 66f03b97fd5802d42ac73bf7
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.1
+Using MongoDB:          6.0.17
+Using Mongosh:          2.3.1
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-09-22T20:21:11.750+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> show dbs;
+admin   40.00 KiB
+config  60.00 KiB
+local   40.00 KiB
+test> use myfirstDatabase
+switched to db myfirstDatabase
+myfirstDatabase> db.createCollection(mydataCollection)
+ReferenceError: mydataCollection is not defined
+myfirstDatabase> db.createCollection(mydataCollection);
+ReferenceError: mydataCollection is not defined
+myfirstDatabase> db.createCollection("myFirstCollection");
+{ ok: 1 }
+myfirstDatabase> show dbs
+admin            40.00 KiB
+config           60.00 KiB
+local            40.00 KiB
+myfirstDatabase   8.00 KiB
+myfirstDatabase> db.myFirstCollection.insertOne({name:"Radhakrushna", age:22, email:"mahdikrs512@gmail.com"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('66f03caefd5802d42ac73bf8')
+}
+myfirstDatabase> db.myFirstCollection.find();
+[
+  {
+    _id: ObjectId('66f03caefd5802d42ac73bf8'),
+    name: 'Radhakrushna',
+    age: 22,
+    email: 'mahdikrs512@gmail.com'
+  }
+]
+myfirstDatabase> db.myFirstCollection.find().pretty();
+[
+  {
+    _id: ObjectId('66f03caefd5802d42ac73bf8'),
+    name: 'Radhakrushna',
+    age: 22,
+    email: 'mahdikrs512@gmail.com'
+  }
+]
+myfirstDatabase>
+
+myfirstDatabase
+myfirstDatabase> db
+myfirstDatabase> db.myFirstCollection.insertMany([{name:"Saurabh", age:23, email:"saurabhnikam@gmail.com"},{name:"Piyush", age:22, email:"piyushmore@gmail.com"},{name:"Sush", age:22, email:"sush@gmail.com", body: "yes"}]);
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('66f0433ffd5802d42ac73bf9'),
+    '1': ObjectId('66f0433ffd5802d42ac73bfa'),
+    '2': ObjectId('66f0433ffd5802d42ac73bfb')
+  }
+}
+myfirstDatabase> db.myFirstCollection.find();
+[
+  {
+    _id: ObjectId('66f03caefd5802d42ac73bf8'),
+    name: 'Radhakrushna',
+    age: 22,
+    email: 'mahdikrs512@gmail.com'
+  },
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bf9'),
+    name: 'Saurabh',
+    age: 23,
+    email: 'saurabhnikam@gmail.com'
+  },
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bfa'),
+    name: 'Piyush',
+    age: 22,
+    email: 'piyushmore@gmail.com'
+  },
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bfb'),
+    name: 'Sush',
+    age: 22,
+    email: 'sush@gmail.com',
+    body: 'yes'
+  }
+]
+myfirstDatabase>
+
+1. find the result of the given collections
+2. Show the result in pretty format
+3. get only Radhakrushn data as ouput
+4. get only Radhakrushn data as ouput with only age
+5. get only Radhakrushn data as ouput without id
+6. set the filter to age 22 and get only first record
+7. Do as 6 with other method
+8. same as 6 but second record
+
+
+myfirstDatabase> db.myFirstCollection.find();
+[
+  {
+    _id: ObjectId('66f03caefd5802d42ac73bf8'),
+    name: 'Radhakrushna',
+    age: 22,
+    email: 'mahdikrs512@gmail.com'
+  },
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bf9'),
+    name: 'Saurabh',
+    age: 23,
+    email: 'saurabhnikam@gmail.com'
+  },
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bfa'),
+    name: 'Piyush',
+    age: 22,
+    email: 'piyushmore@gmail.com'
+  },
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bfb'),
+    name: 'Sush',
+    age: 22,
+    email: 'sush@gmail.com',
+    body: 'yes'
+  }
+]
+myfirstDatabase> db.myFirstCollection.find().pretty();
+[
+  {
+    _id: ObjectId('66f03caefd5802d42ac73bf8'),
+    name: 'Radhakrushna',
+    age: 22,
+    email: 'mahdikrs512@gmail.com'
+  },
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bf9'),
+    name: 'Saurabh',
+    age: 23,
+    email: 'saurabhnikam@gmail.com'
+  },
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bfa'),
+    name: 'Piyush',
+    age: 22,
+    email: 'piyushmore@gmail.com'
+  },
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bfb'),
+    name: 'Sush',
+    age: 22,
+    email: 'sush@gmail.com',
+    body: 'yes'
+  }
+]
+myfirstDatabase> db.myFirstCollection.find({name:"Radhakrushna"});
+[
+  {
+    _id: ObjectId('66f03caefd5802d42ac73bf8'),
+    name: 'Radhakrushna',
+    age: 22,
+    email: 'mahdikrs512@gmail.com'
+  }
+]
+myfirstDatabase> db.myFirstCollection.find({name:"Radhakrushna"}, {age:1})
+[ { _id: ObjectId('66f03caefd5802d42ac73bf8'), age: 22 } ]
+myfirstDatabase> db.myFirstCollection.find({name:"Radhakrushna"}, {age:1, _id:0})
+[ { age: 22 } ]
+myfirstDatabase> db.myFirstCollection.find({age:22}).limit(1);
+[
+  {
+    _id: ObjectId('66f03caefd5802d42ac73bf8'),
+    name: 'Radhakrushna',
+    age: 22,
+    email: 'mahdikrs512@gmail.com'
+  }
+]
+myfirstDatabase> db.myFirstCollection.findOne({age:22});
+{
+  _id: ObjectId('66f03caefd5802d42ac73bf8'),
+  name: 'Radhakrushna',
+  age: 22,
+  email: 'mahdikrs512@gmail.com'
+}
+myfirstDatabase> db.myFirstCollection.find({age:22}).skip(1);
+[
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bfa'),
+    name: 'Piyush',
+    age: 22,
+    email: 'piyushmore@gmail.com'
+  },
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bfb'),
+    name: 'Sush',
+    age: 22,
+    email: 'sush@gmail.com',
+    body: 'yes'
+  }
+]
+myfirstDatabase> db.myFirstCollection.find({age:22}).limit(1).skip(1)
+[
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bfa'),
+    name: 'Piyush',
+    age: 22,
+    email: 'piyushmore@gmail.com'
+  }
+]
+myfirstDatabase>
