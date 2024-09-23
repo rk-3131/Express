@@ -136,8 +136,64 @@ const logicalFunction = async () => {
 // simillarly there are other logical operators which we can use to get the output of the data in a way where we will be having the data in most suitable format based on the condition
 // $and, $or, $not and $nor are the operators which are being used here
 
-logicalFunction();
+// logicalFunction();
 
 // we can use the countDocuments to get the count of the results that matches the query
 // also to sort the fields there is method called as sort({key : 1|-1})
 // 1 here will sort the elements in ascending order and -1 in the descending order
+
+// To update the data that is present in the database we use the updateMany
+
+const updateFunction = async () => {
+  try {
+    const result = await RkFirstCollection.updateMany(
+      { name: "Radhakrushna" },
+      { name: "RK Don" }
+    );
+    console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
+};
+// updateFunction();
+
+const updateFunction2 = async (_id) => {
+  try {
+    const result = await RkFirstCollection.updateMany(
+      { _id },
+      { name: "Radhakrushna Shamrao Mahadik" }
+    );
+    console.log("Inside the second update function");
+    console.log(result);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const updateUsingId = async () => {
+  try {
+    const id = await RkFirstCollection.find({ name: "RK Don" }).select({
+      _id: 1,
+    });
+    console.log("Inside the first update function");
+    updateFunction2(id);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// updateUsingId();
+
+// Deleting the document
+
+const deleteDocument = async () => {
+  try {
+    const id = await RkFirstCollection.find({ name: "Saurabh" }, { _id: 1 });
+    const result = await RkFirstCollection.deleteOne({ _id: id });
+    console.log(result);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+deleteDocument();
