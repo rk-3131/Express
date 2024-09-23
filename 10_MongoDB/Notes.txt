@@ -233,3 +233,201 @@ myfirstDatabase> db.myFirstCollection.find({age:22}).limit(1).skip(1)
   }
 ]
 myfirstDatabase>
+
+
+To update the database we have to make sure that the database has the records that we are looking for 
+there are two methods for the records to get updated and they are
+1. db.collectionName.updateOne({matching condition}, {$set:{values of fields that need to be saved}})
+2. db.collectionName.updateMany({matching condition}, {$set:{values of fields that need to be saved}})
+
+1. Update piyush to gotya
+2. update sush to sushant
+3. Update the age of everyone to 23 who has 22
+
+switched to db myfirstDatabase
+myfirstDatabase> show collections
+myFirstCollection
+myfirstDatabase> db.myFirstCollection.find()
+[
+  {
+    _id: ObjectId('66f03caefd5802d42ac73bf8'),
+    name: 'Radhakrushna',
+    age: 22,
+    email: 'mahdikrs512@gmail.com'
+  },
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bf9'),
+    name: 'Saurabh',
+    age: 23,
+    email: 'saurabhnikam@gmail.com'
+  },
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bfa'),
+    name: 'Piyush',
+    age: 22,
+    email: 'piyushmore@gmail.com'
+  },
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bfb'),
+    name: 'Sush',
+    age: 22,
+    email: 'sush@gmail.com',
+    body: 'yes'
+  }
+]
+myfirstDatabase> db.myFirstCollection.updateOne({name:"Piyush"}, {$set : {name:"Gotya"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+myfirstDatabase> db.myFirstCollection.updateOne({name:"Sush"}, {$set: {name:"Sushant"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+myfirstDatabase> db.myFirstCollection.find()
+[
+  {
+    _id: ObjectId('66f03caefd5802d42ac73bf8'),
+    name: 'Radhakrushna',
+    age: 22,
+    email: 'mahdikrs512@gmail.com'
+  },
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bf9'),
+    name: 'Saurabh',
+    age: 23,
+    email: 'saurabhnikam@gmail.com'
+  },
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bfa'),
+    name: 'Gotya',
+    age: 22,
+    email: 'piyushmore@gmail.com'
+  },
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bfb'),
+    name: 'Sushant',
+    age: 22,
+    email: 'sush@gmail.com',
+    body: 'yes'
+  }
+]
+myfirstDatabase> db.myFirstCollection.updateMany({age:22}, {$set : {age : 23}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 3,
+  modifiedCount: 3,
+  upsertedCount: 0
+}
+myfirstDatabase> db.myFirstCollection.find()
+[
+  {
+    _id: ObjectId('66f03caefd5802d42ac73bf8'),
+    name: 'Radhakrushna',
+    age: 23,
+    email: 'mahdikrs512@gmail.com'
+  },
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bf9'),
+    name: 'Saurabh',
+    age: 23,
+    email: 'saurabhnikam@gmail.com'
+  },
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bfa'),
+    name: 'Gotya',
+    age: 23,
+    email: 'piyushmore@gmail.com'
+  },
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bfb'),
+    name: 'Sushant',
+    age: 23,
+    email: 'sush@gmail.com',
+    body: 'yes'
+  }
+]
+myfirstDatabase>
+
+Delete operation can be performed by the database by using the command of deleteOne and deleteMany
+1. Delete one person with age 23
+2. Delete all with age 23
+3. Delete whole collection
+
+myfirstDatabase> db.myFirstCollection.updateOne({name:"Saurabh"}, {$set : {age : 24}});
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+myfirstDatabase> db.myFirstCollection.deleteOne({age : 22})
+{ acknowledged: true, deletedCount: 0 }
+myfirstDatabase> db.myFirstCollection.find();
+[
+  {
+    _id: ObjectId('66f03caefd5802d42ac73bf8'),
+    name: 'Radhakrushna',
+    age: 23,
+    email: 'mahdikrs512@gmail.com'
+  },
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bf9'),
+    name: 'Saurabh',
+    age: 24,
+    email: 'saurabhnikam@gmail.com'
+  },
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bfa'),
+    name: 'Gotya',
+    age: 23,
+    email: 'piyushmore@gmail.com'
+  },
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bfb'),
+    name: 'Sushant',
+    age: 23,
+    email: 'sush@gmail.com',
+    body: 'yes'
+  }
+]
+myfirstDatabase> db.myFirstCollection.deleteOne({age : 23})
+{ acknowledged: true, deletedCount: 1 }
+myfirstDatabase> db.myFirstCollection.find();
+[
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bf9'),
+    name: 'Saurabh',
+    age: 24,
+    email: 'saurabhnikam@gmail.com'
+  },
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bfa'),
+    name: 'Gotya',
+    age: 23,
+    email: 'piyushmore@gmail.com'
+  },
+  {
+    _id: ObjectId('66f0433ffd5802d42ac73bfb'),
+    name: 'Sushant',
+    age: 23,
+    email: 'sush@gmail.com',
+    body: 'yes'
+  }
+]
+myfirstDatabase> db.myFirstCollection.deleteMany({age:23})
+{ acknowledged: true, deletedCount: 2 }
+myfirstDatabase> db.myFirstCollection.deleteMany({})
+{ acknowledged: true, deletedCount: 1 }
+myfirstDatabase> db.myFirstCollection.find();
+
+myfirstDatabase>
