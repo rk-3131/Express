@@ -15,15 +15,24 @@ const myFirstSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
+    maxlength: 30,
+    minlength: 2,
   },
-  age: Number,
+  age: {
+    type: Number,
+    validate(value) {
+      if (value < 18) {
+        throw new Error("The age has to be more than 18");
+      }
+    },
+  },
   dob: Date,
   email: {
     type: String,
     required: true,
   },
 });
-
+// There are number of validators are present in there and they will be used for the input validation
 // Now for this schema we need a model
 
 const RkFirstCollection = new mongoose.model("FirstCollection", myFirstSchema);
@@ -31,8 +40,8 @@ const RkFirstCollection = new mongoose.model("FirstCollection", myFirstSchema);
 const insertFunction = async () => {
   try {
     const myData = RkFirstCollection({
-      name: "Piyush",
-      age: 22,
+      name: "Gotya Bhai",
+      age: 15,
       dob: Date.now(),
       email: "piyushgmore@gmail.com",
     });
@@ -196,4 +205,4 @@ const deleteDocument = async () => {
   }
 };
 
-deleteDocument();
+// deleteDocument();
