@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const validator = require("validator");
 
 mongoose
   .connect("mongodb://localhost:27017/rkdatabase")
@@ -30,6 +31,12 @@ const myFirstSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
+    unique: true,
+    validate(value) {
+      if (!validator.isEmail(value)) {
+        throw new Error("The email format is invalid");
+      }
+    },
   },
 });
 // There are number of validators are present in there and they will be used for the input validation
@@ -40,10 +47,10 @@ const RkFirstCollection = new mongoose.model("FirstCollection", myFirstSchema);
 const insertFunction = async () => {
   try {
     const myData = RkFirstCollection({
-      name: "Gotya Bhai",
-      age: 15,
+      name: "Saurabh Nikam",
+      age: 23,
       dob: Date.now(),
-      email: "piyushgmore@gmail.com",
+      email: "saurabhrnikam@gmail.com",
     });
     const result = await myData.save();
     console.log(result);
@@ -52,7 +59,7 @@ const insertFunction = async () => {
   }
 };
 
-// insertFunction();
+insertFunction();
 
 const inserManyFunction = async () => {
   try {
