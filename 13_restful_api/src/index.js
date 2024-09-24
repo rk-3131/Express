@@ -9,18 +9,42 @@ app.get("/", (req, res) => {
   res.send("This is home page");
 });
 
+// app.post("/students", (req, res) => {
+//   const data = new Student(req.body);
+//   data
+//     .save()
+//     .then(() => {
+//       console.log("It is added into the database");
+//     })
+//     .catch((e) => {
+//       res.send("Error");
+//       console.log(e);
+//     });
+//   res.send("Hello from the other side");
+// });
+
 app.post("/students", (req, res) => {
-  const data = new Student(req.body);
-  data
-    .save()
-    .then(() => {
-      console.log("It is added into the database");
-    })
-    .catch((e) => {
-      res.send("Error");
-      console.log(e);
-    });
+  const createFunction = async () => {
+    try {
+      const data = await new Student(req.body);
+      const result = await data.save();
+      console.log("Added into the database");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  createFunction();
   res.send("Hello from the other side");
+});
+
+app.get("/students", async (req, res) => {
+  try {
+    const data = await Student.find();
+    res.send(data);
+    console.log("Data fetched successfully");
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 app.listen(port, () => {
