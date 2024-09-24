@@ -47,6 +47,26 @@ app.get("/students", async (req, res) => {
   }
 });
 
+// app.get("/students/:id", async (req, res) => {
+//   try {
+//     const result = await Student.findById({ _id: req.params.id });
+//     res.send(result);
+//     console.log(result);
+//   } catch (err) {
+//     console.log(err);
+//   }
+// });
+
+app.get("/students/:name", async (req, res) => {
+  try {
+    const result = await Student.find({ name: req.params.name });
+    res.send(result);
+    console.log(result);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 app.listen(port, () => {
   console.log(`Listening on the port number ${port}`);
 });
