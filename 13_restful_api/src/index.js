@@ -47,21 +47,43 @@ app.get("/students", async (req, res) => {
   }
 });
 
-// app.get("/students/:id", async (req, res) => {
-//   try {
-//     const result = await Student.findById({ _id: req.params.id });
-//     res.send(result);
-//     console.log(result);
-//   } catch (err) {
-//     console.log(err);
-//   }
-// });
+app.get("/students/:id", async (req, res) => {
+  try {
+    const result = await Student.findById({ _id: req.params.id });
+    res.send(result);
+    console.log(result);
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 app.get("/students/:name", async (req, res) => {
   try {
     const result = await Student.find({ name: req.params.name });
     res.send(result);
     console.log(result);
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.patch("/students/:id", async (req, res) => {
+  try {
+    const updateStudent = await Student.findByIdAndUpdate(
+      { _id: req.params.id },
+      req.body
+    );
+    res.send(updateStudent);
+    console.log("Updated");
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.delete("/students/:id", async (req, res) => {
+  try {
+    const result = await Student.findByIdAndDelete(req.params.id);
+    console.log("Deleted Succesfully");
   } catch (err) {
     console.log(err);
   }
