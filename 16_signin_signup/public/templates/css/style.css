@@ -1,0 +1,45 @@
+.navBar {
+  width: 100%;
+  height: 20vh;
+  position: relative;
+  display: flex;
+  background-image: url("../images/navBG.jpg");
+  flex-direction: row;
+}
+
+.navBar a {
+  text-decoration: none;
+  color: aliceblue;
+}
+
+.navBar .left {
+  position: absolute;
+  left: 0;
+  top: 25%;
+}
+
+.navBar .right {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  right: 0;
+  top: 25%;
+}
+
+.navBar .left a {
+  display: flex;
+  margin: auto 40px;
+  font-size: 30px;
+}
+
+.navBar .right a {
+  align-items: center;
+  justify-content: center;
+  margin: 40px;
+  font-size: 30px;
+}
+
+.middle {
+  background-image: url("../images/navBG.jpg");
+  height: 75vh;
+}
