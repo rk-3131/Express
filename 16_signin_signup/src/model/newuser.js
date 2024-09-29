@@ -34,12 +34,18 @@ const mySchema = mongoose.Schema({
   },
   adhar: {
     type: String,
-    unique: true,
     required: true,
   },
-  pan: {
+  age: {
+    type: Number,
+    required: true,
+  },
+  pass1: {
     type: String,
-    unique: true,
+    required: true,
+  },
+  pass2: {
+    type: String,
     required: true,
   },
 });
