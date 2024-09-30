@@ -4,9 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign In</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     {{>navbar}}
-    
+    <div class="outerForm">
+        <div class="leftForm">
+            <div class="symbol">
+                <i class="fa-solid fa-users-line fa-beat fa-2xl" style="color: #f3f4f7;"></i>
+            </div>
+            <div class="header">
+                <p>Welcome!!!</p>
+            </div>
+        </div>
+        <div class="form2">
+        <form action="/login" method="post">
+               <div>
+                 <div class="email">
+                <input type="email" name="email" id="email" placeholder="Your Email">
+            </div>
+                <div class="pass1">
+                <input type="password" name="pass1" id="pass1" placeholder="Enter password">
+            </div>
+               </div>
+            <div class="btn2">
+                <button type="submit">Sign In</button>
+            </div>
+        </form>
+    </div>
+    </div>
 </body>
 </html>

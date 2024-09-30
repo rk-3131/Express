@@ -48,4 +48,23 @@ router.post("/adduser", async (req, res) => {
     console.log(err);
   }
 });
+
+router.post("/login", async (req, res) => {
+  try {
+    const email = await req.body.email;
+    const pass = await req.body.pass1;
+
+    const result = await UserModel.find({ email: email });
+    if (result == null) {
+      res.status(200).render("signin");
+    }
+    if (email == result[0].email && pass == result[0].pass1) {
+      res.render("index");
+    } else {
+      res.render("signin");
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
 module.exports = router;
