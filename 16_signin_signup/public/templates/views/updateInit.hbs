@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    {{>navbar}}
+    <div class="outerForm">
+        <div class="leftForm">
+            <div class="symbol">
+                <i class="fa-solid fa-users-line fa-beat fa-2xl" style="color: #f3f4f7;"></i>
+            </div>
+            <div class="header">
+                <p>Welcome!!!</p>
+            </div>
+        </div>
+        <div class="form">
+        <form action="/update" method="post">
+            <div>
+                <div class="email">
+                <input type="email" name="email" id="email" placeholder="Your Email">
+            </div>
+            <div class="btn">
+                <button type="submit">Find</button>
+            </div>
+        </form>
+    </div>
+    </div>
+</body>
+</html>

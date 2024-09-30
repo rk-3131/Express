@@ -49,6 +49,42 @@ router.post("/adduser", async (req, res) => {
   }
 });
 
+router.get("/update", (req, res) => {
+  res.render("updateInit");
+});
+
+router.post("/update", async (req, res) => {
+  try {
+    const email = await req.body.email;
+    const result = await UserModel.find({ email: email });
+    console.log(result);
+    if (result == null) {
+      res.render("updateInit");
+    } else {
+      const data = {
+        fName: result[0].fName,
+        lName: result[0].lName,
+        email: result[0].email,
+        gender: result[0].gender,
+        phone: result[0].phone,
+        dob: result[0].dob,
+        age: result[0].age,
+        adhar: result[0].adhar,
+        pass1: result[0].pass1,
+        pass2: result[0].pass2,
+      };
+      res.render("update", data);
+    }
+  } catch (err) {}
+});
+
+router.post("/update", async (req, res) => {
+  try {
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 router.post("/login", async (req, res) => {
   try {
     const email = await req.body.email;

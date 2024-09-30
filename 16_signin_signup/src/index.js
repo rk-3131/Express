@@ -18,6 +18,10 @@ app.set("views", viewPath);
 hbs.registerPartials(partialPath);
 app.use(express.static(staticPath));
 
+hbs.registerHelper("eq", function (arg1, arg2) {
+  return arg1 === arg2;
+});
+
 app.listen(port, () => {
   console.log(`Process started at port number ${port}`);
 });
