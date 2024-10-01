@@ -124,6 +124,20 @@ router.post("/updatefinal", async (req, res) => {
   }
 });
 
+router.post("/delete", async (req, res) => {
+  try {
+    const user = await UserModel.findOne({ email: req.body.email }, { _id: 1 });
+
+    const id = user._id.toString();
+
+    const result = await UserModel.findByIdAndDelete(id);
+    console.log("Deleted Successfully");
+    res.render("index");
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 router.post("/login", async (req, res) => {
   try {
     const email = await req.body.email;

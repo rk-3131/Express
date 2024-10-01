@@ -121,3 +121,8 @@ button {
   border-radius: 5px;
   border: 0.5px solid wheat;
 }
+
+.containerForm {
+  display: flex;
+  flex-direction: column;
+}
