@@ -1,5 +1,6 @@
 const express = require("express");
 const UserModel = require("../model/newuser");
+const bcrypt = require("bcryptjs");
 
 const router = new express.Router();
 
@@ -25,8 +26,11 @@ router.post("/adduser", async (req, res) => {
     const dob = await req.body.dob;
     const age = await req.body.age;
     const adhar = await req.body.adhar;
-    const pass1 = await req.body.pass1;
-    const pass2 = await req.body.pass2;
+    const pass1temp = await req.body.pass1;
+    const pass2temp = await req.body.pass2;
+
+    const pass1 = await bcrypt.hash(pass1temp, 10);
+    const pass2 = await bcrypt.hash(pass2temp, 10);
 
     const data = UserModel({
       fName: fName,
@@ -70,8 +74,8 @@ router.post("/update", async (req, res) => {
         dob: result[0].dob,
         age: result[0].age,
         adhar: result[0].adhar,
-        pass1: result[0].pass1,
-        pass2: result[0].pass2,
+        pass1: await bcrypt.hash(result[0].pass1, 10),
+        pass2: await bcrypt.hash(result[0].pass2, 10),
       };
       res.render("update", data);
     }
@@ -147,9 +151,14 @@ router.post("/login", async (req, res) => {
     if (result == null) {
       res.status(200).render("signin");
     }
-    if (email == result[0].email && pass == result[0].pass1) {
+    if (
+      email == result[0].email &&
+      (await bcrypt.compare(pass, result[0].pass1))
+    ) {
+      console.log("Password matched");
       res.render("index");
     } else {
+      console.log("Password not matched");
       res.render("signin");
     }
   } catch (err) {
