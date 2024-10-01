@@ -78,10 +78,49 @@ router.post("/update", async (req, res) => {
   } catch (err) {}
 });
 
-router.post("/update", async (req, res) => {
+router.post("/updatefinal", async (req, res) => {
   try {
+    const user = await UserModel.findOne({ email: req.body.email }, { _id: 1 });
+
+    const id = user._id.toString();
+    console.log(id);
+
+    const {
+      fName,
+      lName,
+      email,
+      gender,
+      phone,
+      dob,
+      age,
+      adhar,
+      pass1,
+      pass2,
+    } = req.body;
+    const result = await UserModel.findByIdAndUpdate(
+      id,
+      {
+        $set: {
+          fName,
+          lName,
+          email,
+          gender,
+          phone,
+          dob,
+          age,
+          adhar,
+          pass1,
+          pass2,
+        },
+      },
+      { new: true } // Return the updated document
+    );
+
+    console.log("Updated:", result);
+    res.render("index"); // Render the index page after successful update
   } catch (err) {
     console.log(err);
+    res.status(500).send("Error updating user");
   }
 });
 
